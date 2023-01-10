@@ -5,7 +5,7 @@ const Rendre = () => {
     return (
         <div className="Rendre">
             <div>
-                <h1>Rendre le son au tableau</h1>
+                <h3>Rendre le son au tableau</h3>
                 <div>
                 </div>
             </div>
