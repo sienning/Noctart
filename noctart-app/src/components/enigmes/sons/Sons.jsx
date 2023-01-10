@@ -36,7 +36,7 @@ const Sons = () => {
         <div className="Sons">
             <div>
                 <h1>Sons des tableaux</h1>
-                <div
+                {/* <div
                     className="camera-div"
                 >
                     <Camera
@@ -46,8 +46,31 @@ const Sons = () => {
                         aspectRatio="cover"
                         videoSourceDeviceId={activeDeviceId}
                     />
+                </div> */}
+                <div className="arjs-loader">
+                    <div>Loading, please wait...</div>
                 </div>
-                <span>{activeDeviceId}</span>
+
+                <a-scene
+                    vr-mode-ui="enabled: false;"
+                    renderer="logarithmicDepthBuffer: true;"
+                    embedded
+                    arjs="trackingMethod: best; sourceType: webcam;debugUIEnabled: false;"
+                >
+                    <a-nft
+                        type="nft"
+                        url="assets/nft/rousseau"
+                        smooth="true"
+                        smoothCount="10"
+                        smoothTolerance=".01"
+                        smoothThreshold="5"
+                    >
+                        <a-entity material='color: red' geometry='primitive: box' scale="10 10 10">
+                        </a-entity>
+                    </a-nft>
+                    <a-entity camera></a-entity>
+                </a-scene>
+
                 <select
                     onChange={event => {
                         setActiveDeviceId(event.target.value);
@@ -59,14 +82,14 @@ const Sons = () => {
                         </option>
                     ))}
                 </select>
-                { isRecup && <Recup /> }
-                { isRendre && <Rendre /> }
+                {isRecup && <Recup />}
+                {isRendre && <Rendre />}
                 <div>
                     <button onClick={handleRecup} style={{ marginRight: 10 }}>Récupérer un son</button>
                     <button onClick={handleRendre}>Rendre un son</button>
                 </div>
             </div>
-        </div>
+        </div >
     )
 }
 

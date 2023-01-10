@@ -1,0 +1,22 @@
+{
+    "name": "Noctart au Musée de l'Orangerie",
+    "short_name": "Noctart",
+    "dir": "ltr",
+    "lang": "fr",
+    "orientation": "any",
+    "start_url": "/",
+    "background_color": "#fff",
+    "theme_color": "#fff",
+    "display": "standalone",
+    "description": "Découvrez le Musée de l'Orangerie et sa collection des Arts à Paris, au fil d'un jeu de piste retraçant chaque artiste exposé.",
+    "icons": [
+        {
+            "src": "/assets/noctart.png",
+            "sizes": "192x192"
+        },
+        {
+            "src": "/assets/noctart.png",
+            "sizes": "512x512"
+        }
+    ]
+}
