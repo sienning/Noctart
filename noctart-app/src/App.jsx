@@ -1,12 +1,13 @@
-import './App.css'
+import "./App.css";
 import {
   BrowserRouter,
   createBrowserRouter,
   RouterProvider,
-  Link
+  Link,
 } from "react-router-dom";
-import Accueil from './components/pages/Accueil';
-import Enigme from './components/pages/Enigme';
+import Accueil from "./components/pages/Accueil";
+import Enigme from "./components/pages/Enigme";
+import { ScanQrCode } from "./ScanQrCode";
 
 function App() {
   const browserList = [
@@ -18,9 +19,12 @@ function App() {
       path: "/enigme/:enigmeId",
       element: <Enigme />,
     },
-  ]
+    {
+      path: "/qrcode",
+      element: <ScanQrCode />,
+    },
+  ];
   const router = createBrowserRouter(browserList);
-
 
   return (
     <div className="App">
@@ -29,7 +33,7 @@ function App() {
         <RouterProvider router={router} />
       </div>
     </div>
-  )
+  );
 }
 
-export default App
+export default App;
