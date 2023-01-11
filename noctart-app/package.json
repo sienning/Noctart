@@ -4,11 +4,12 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "vite",
+    "dev": "vite --host",
     "build": "vite build",
     "preview": "vite preview"
   },
   "dependencies": {
+    "framer-motion": "^8.4.1",
     "image-recognition": "^1.1.0",
     "localforage": "^1.10.0",
     "match-sorter": "^6.3.1",
@@ -17,8 +18,9 @@
     "react-dom": "^18.2.0",
     "react-draggable": "^4.4.5",
     "react-router-dom": "^6.6.1",
+    "react-svg": "^15.1.18",
     "react-webcam": "^7.0.1",
-    "sort-by": "^1.2.0",
+    "sort-by": "^0.0.2",
     "styled-components": "^5.3.6"
   },
   "devDependencies": {
