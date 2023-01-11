@@ -31,7 +31,7 @@ const Recup = () => {
                 <h3>Recupérer le son du tableau</h3>
                 <div style={{ width: "200px", height: "200px" }}>
                     <Draggable {...dragHandlers} >
-                        <div>
+                        <div className="box cursor-y">
                             <Son />
                         </div>
                     </Draggable>

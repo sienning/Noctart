@@ -28,7 +28,7 @@ const Sons = () => {
                 setIsFound(true)
             });
             marker.addEventListener('markerLost', () => {
-                console.log("clear");
+                console.log("marqueur perdu");
                 setIsFound(false)
             })
         });
@@ -46,7 +46,7 @@ const Sons = () => {
             <div>
                 <h1>Sons des tableaux</h1>
                 <div className="arjs-loader">
-                    <div>Loading, please wait...</div>
+                    <div>Chargement, patientez...</div>
                 </div>
 
                 <a-scene
@@ -57,7 +57,7 @@ const Sons = () => {
                 >
                     <a-nft
                         type="nft"
-                        url="assets/nft/rousseau"
+                        url="assets/nft/rousseau/rousseau"
                         smooth="true"
                         smoothCount="10"
                         smoothTolerance=".01"

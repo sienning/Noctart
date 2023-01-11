@@ -3,7 +3,7 @@ import {
     useParams
 } from "react-router-dom";
 import Fleurs from "../enigmes/Fleurs";
-import Piano from "../enigmes/Piano";
+import Piano from "../enigmes/piano/Piano";
 import Sons from "../enigmes/sons/Sons";
 
 const Enigme = () => {
