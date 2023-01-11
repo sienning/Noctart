@@ -5,7 +5,7 @@ import Rendre from "./Rendre";
 const Sons = () => {
     const [isRecup, setIsRecup] = useState(false);
     const [isRendre, setIsRendre] = useState(false);
-    const [devices, setDevices] = useState([]);
+    const [isFound, setIsFound] = useState(false);
 
     const handleRecup = () => {
         setIsRecup(true)
@@ -18,28 +18,18 @@ const Sons = () => {
     }
 
     useEffect(() => {
-        (async () => {
-            const devices = await navigator.mediaDevices.enumerateDevices();
-            const videoDevices = devices.filter(i => i.kind == 'videoinput');
-            setDevices(videoDevices);
-            if (videoDevices.length === 1) setActiveDeviceId(videoDevices[0].deviceId)
-        })();
-    });
-
-
-
-    useEffect(() => {
         window.addEventListener("arjs-nft-loaded", (event) => {
             console.log(event);
-            const camera = document.querySelector('[camera]');
             const marker = document.querySelector('a-nft');
-            let check
 
             marker.addEventListener("markerFound", (event) => {
                 console.log("event", event);
+
+                setIsFound(true)
             });
             marker.addEventListener('markerLost', () => {
                 console.log("clear");
+                setIsFound(false)
             })
         });
     }, [])
@@ -84,17 +74,11 @@ const Sons = () => {
                     <a-entity camera></a-entity>
                 </a-scene>
 
-                <select
-                    onChange={event => {
-                        setActiveDeviceId(event.target.value);
-                    }}
-                >
-                    {devices.map(d => (
-                        <option key={d.deviceId} value={d.deviceId}>
-                            {d.label}
-                        </option>
-                    ))}
-                </select>
+                {
+                    isFound &&
+                    <div>TROUVÉ</div>
+                }
+
                 {isRecup && <Recup />}
                 {isRendre && <Rendre />}
                 <div>
