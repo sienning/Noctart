@@ -1,3 +1,61 @@
 .container {
-  padding: 30px;
+  display: flex;
+  flex-direction: column;
+  width: 100vw;
+  height: 100vh;
+  position: relative;
+}
+
+.containerLogos,
+.containerLogo {
+  display: flex;
+  flex-direction: row;
+}
+
+.containerLogos {
+  justify-content: space-between;
+  position: absolute;
+  width: 100vw;
+  height: 100vh;
+  z-index: -1;
+}
+
+.containerDescription {
+  display: flex;
+  flex-direction: column;
+  align-self: center;
+  margin-top: 90px;
+  width: 80vw;
+  border-width: 1px;
+  border-style: solid;
+  border-color: #ada9aa;
+  padding: 20px;
+  background-color: #ffffff;
+  height: 80vh;
+}
+
+.title {
+  color: #fc8c1e;
+  font-weight: 700;
+  font-size: 16px;
+}
+
+.description {
+  font-size: 16px;
+  padding: 10px;
+}
+
+.detective {
+  position: absolute;
+  z-index: 2;
+  bottom: 30px;
+  left: 0;
+}
+
+.linkStart {
+  color: #fc8c1e;
+  font-weight: 600;
+  margin-left: 100px;
+  margin-top: 80px;
+  font-size: 14px;
 }

@@ -6,12 +6,17 @@ import Accueil from "./components/pages/accueil/Accueil";
 import Enigme from "./components/pages/Enigme";
 import { SplashScreen } from "./components/splash-screen/SplashScreen";
 import { ScanQrCode } from "./ScanQrCode";
+import { Enigmes } from "./components/pages/enigmes/Enigmes";
 
 function App() {
   const browserList = [
     {
       path: "/",
       element: <Accueil />,
+    },
+    {
+      path: "/enigme",
+      element: <Enigmes />,
     },
     {
       path: "/enigme/:enigmeId",

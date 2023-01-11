@@ -2,14 +2,14 @@ import * as React from "react";
 
 const OrangerieLogoDarkSmallSvg = (props) => (
   <svg
-    width={66}
-    height={44}
+    width={45}
+    height={43}
     fill="none"
     xmlns="http://www.w3.org/2000/svg"
     xmlnsXlink="http://www.w3.org/1999/xlink"
     {...props}
   >
-    <path fill="url(#orangeriedarksmalla)" d="M0 .059h65.403v43H0z" />
+    <path fill="url(#orangeriedarksmalla)" d="M-10 0h65.403v43H-10z" />
     <defs>
       <pattern
         id="orangeriedarksmalla"
