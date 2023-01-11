@@ -1,9 +1,8 @@
 import "./App.css";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import React from "react";
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
-import Accueil from "./components/pages/Accueil";
+import Accueil from "./components/pages/accueil/Accueil";
 import Enigme from "./components/pages/Enigme";
 import { SplashScreen } from "./components/splash-screen/SplashScreen";
 import { ScanQrCode } from "./ScanQrCode";
