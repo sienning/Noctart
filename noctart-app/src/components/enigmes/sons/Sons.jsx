@@ -1,16 +1,11 @@
 import { useEffect, useRef, useState } from "react";
 import Recup from "./Recup";
 import Rendre from "./Rendre";
-import { Camera } from "react-camera-pro";
 
 const Sons = () => {
-    const camera = useRef(null);
-    const [image, setImage] = useState(null);
-    const [numberOfCameras, setNumberOfCameras] = useState(0);
     const [isRecup, setIsRecup] = useState(false);
     const [isRendre, setIsRendre] = useState(false);
     const [devices, setDevices] = useState([]);
-    const [activeDeviceId, setActiveDeviceId] = useState(undefined);
 
     const handleRecup = () => {
         setIsRecup(true)
@@ -32,21 +27,34 @@ const Sons = () => {
     });
 
 
+
+    useEffect(() => {
+        window.addEventListener("arjs-nft-loaded", (event) => {
+            console.log(event);
+            const camera = document.querySelector('[camera]');
+            const marker = document.querySelector('a-nft');
+            let check
+
+            marker.addEventListener("markerFound", (event) => {
+                console.log("event", event);
+            });
+            marker.addEventListener('markerLost', () => {
+                console.log("clear");
+            })
+        });
+    }, [])
+
+    useEffect(() => {
+
+
+    }, [])
+
+
+
     return (
         <div className="Sons">
             <div>
                 <h1>Sons des tableaux</h1>
-                {/* <div
-                    className="camera-div"
-                >
-                    <Camera
-                        ref={camera}
-                        numberOfCamerasCallback={setNumberOfCameras}
-                        facingMode='environment'
-                        aspectRatio="cover"
-                        videoSourceDeviceId={activeDeviceId}
-                    />
-                </div> */}
                 <div className="arjs-loader">
                     <div>Loading, please wait...</div>
                 </div>
@@ -64,8 +72,13 @@ const Sons = () => {
                         smoothCount="10"
                         smoothTolerance=".01"
                         smoothThreshold="5"
+                        emitevents="true"
                     >
-                        <a-entity material='color: red' geometry='primitive: box' scale="10 10 10">
+                        <a-entity
+                            gltf-model=""
+                            scale="5 5 5"
+                            position="150 300 -100"
+                        >
                         </a-entity>
                     </a-nft>
                     <a-entity camera></a-entity>
