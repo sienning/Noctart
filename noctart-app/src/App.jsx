@@ -1,9 +1,12 @@
 import "./App.css";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import Accueil from "./components/pages/accueil/Accueil";
+import React from "react";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
+
+import Accueil from "./components/pages/Accueil";
 import Enigme from "./components/pages/Enigme";
 import { SplashScreen } from "./components/splash-screen/SplashScreen";
-import { useState } from "react";
+import { ScanQrCode } from "./ScanQrCode";
 
 function App() {
   const browserList = [
@@ -15,8 +18,11 @@ function App() {
       path: "/enigme/:enigmeId",
       element: <Enigme />,
     },
+    {
+      path: "/qrcode",
+      element: <ScanQrCode />,
+    },
   ];
-
   const router = createBrowserRouter(browserList);
 
   return (
