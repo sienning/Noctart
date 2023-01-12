@@ -1,0 +1,137 @@
+.containerSons {
+  display: flex;
+  flex-direction: column;
+  width: 100vw;
+  height: 100vh;
+  align-items: center;
+}
+
+.containerDescriptionSons {
+  display: flex;
+  flex-direction: column;
+  width: 80vw;
+  border-width: 1px;
+  border-style: solid;
+  border-color: #ada9aa;
+  padding: 20px;
+  margin-top: 100px;
+  background-color: #ffffff;
+  align-items: center;
+}
+
+.title {
+  color: #fc8c1e;
+  font-weight: 700;
+  font-size: 16px;
+  padding: 0;
+  margin: 0;
+}
+
+.description {
+  font-size: 16px;
+  padding: 5px;
+}
+
+.painter {
+  position: absolute;
+  z-index: 2;
+  bottom: 10px;
+  left: 0;
+}
+
+.buttonStart {
+  width: 100px;
+  background-color: transparent;
+  padding: 4px;
+  margin: 0;
+  color: #fc8c1e;
+  font-weight: 700;
+  font-size: 16px;
+  border-color: #fc8c1e;
+  border-style: solid;
+  border-width: 1px;
+  border-color: #fc8c1e;
+}
+
+.containerEnigmaSons {
+  width: 100%;
+  height: 100%;
+  background-color: #3d3636;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  position: relative;
+}
+
+.headerBar {
+  display: flex;
+  padding: 0px 25px;
+  height: 12vh;
+  align-items: center;
+  z-index: 1;
+}
+
+.headerBarContent {
+  display: flex;
+  flex: 1;
+  flex-direction: row;
+  align-self: flex-start;
+  justify-content: space-between;
+}
+
+.labelEnigma {
+  height: 60px;
+  width: 33px;
+  background-color: #fc8c1e;
+  color: #ffffff;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: center;
+  border-bottom-left-radius: 3px;
+  border-bottom-right-radius: 3px;
+}
+
+.labelEnigmaNumber {
+  padding: 10px;
+  margin: 0;
+  font-weight: 700;
+}
+
+.buttonLabelEnigma {
+  margin: 0;
+  padding: 0;
+  border-top-left-radius: 0px;
+  border-top-right-radius: 0px;
+  border-bottom-left-radius: 3px;
+  border-bottom-right-radius: 3px;
+  border-color: #fc8c1e;
+}
+
+.containerOptions {
+  display: flex;
+  align-items: center;
+  width: 80px;
+  justify-content: space-between;
+}
+
+.logoO {
+  position: absolute;
+}
+
+.cameraAction {
+  position: absolute;
+  margin-left: auto;
+  margin-right: auto;
+  left: 0;
+  right: 0;
+  top: 43vh;
+  z-index: 1;
+  background-color: transparent;
+  border-color: transparent;
+}
+
+.cameraAction:hover,
+.cameraAction:focus {
+  border-color: transparent;
+}

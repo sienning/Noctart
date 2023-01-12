@@ -55,7 +55,19 @@
 .linkStart {
   color: #fc8c1e;
   font-weight: 600;
-  margin-left: 100px;
+  margin-left: 170px;
   margin-top: 80px;
   font-size: 14px;
+  border-color: #fc8c1e;
+  border-style: solid;
+  border-width: 1px;
+  border-color: #fc8c1e;
+  border-radius: 8px;
+  width: 100px;
+  padding: 10px;
+}
+
+.linkStart:hover {
+  background-color: #fc8c1e;
+  color: #ffffff;
 }

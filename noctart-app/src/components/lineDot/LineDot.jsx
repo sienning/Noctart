@@ -1,6 +1,6 @@
 import React from "react";
 
-export const LineDot = () => {
+export const LineDot = ({ dot }) => {
   return (
     <div
       style={{
@@ -19,16 +19,18 @@ export const LineDot = () => {
         }}
       />
 
-      <div
-        style={{
-          position: "absolute",
-          height: "16px",
-          width: "16px",
-          borderRadius: "50%",
-          backgroundColor: "#C3C4C4",
-          bottom: 90,
-        }}
-      />
+      {dot && (
+        <div
+          style={{
+            position: "absolute",
+            height: "16px",
+            width: "16px",
+            borderRadius: "50%",
+            backgroundColor: "#C3C4C4",
+            bottom: 90,
+          }}
+        />
+      )}
     </div>
   );
 };

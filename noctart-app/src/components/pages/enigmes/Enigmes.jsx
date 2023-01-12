@@ -8,8 +8,8 @@ import OrangerieLogoDarkSmallSvg from "../../svg/OrangerieLogoDarkSmallSvg";
 import "./enigmes.css";
 
 export const Enigmes = () => {
-  const [enigmaOneSolved, setEnigmaOneSolved] = useState(false);
-  const [enigmaTwoSolved, setEnigmaTwoSolved] = useState(false);
+  const [enigmaOneSolved, setEnigmaOneSolved] = useState(true);
+  const [enigmaTwoSolved, setEnigmaTwoSolved] = useState(true);
   const [enigmaThreeSolved, setEnigmaThreeSolved] = useState(false);
 
   return (
