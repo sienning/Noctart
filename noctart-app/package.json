@@ -12,6 +12,7 @@
     "framer-motion": "^8.4.1",
     "image-recognition": "^1.1.0",
     "localforage": "^1.10.0",
+    "lottie-react": "^2.3.1",
     "match-sorter": "^6.3.1",
     "react": "^18.2.0",
     "react-camera-pro": "^1.2.1",
