@@ -72,7 +72,7 @@ const Sons = () => {
         setIsFound(true);
       });
       marker.addEventListener("markerLost", () => {
-        console.log("clear");
+        console.log("marqueur perdu");
         setIsFound(false);
       });
     });

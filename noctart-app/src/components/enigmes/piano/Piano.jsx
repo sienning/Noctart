@@ -1,5 +1,6 @@
 import React from "react";
 
+import FillesPianoCamera from "./FillesPianoCamera";
 import { LineDot } from "../../lineDot/LineDot";
 import NoctartLogoDarkSmallSvg from "../../svg/NoctartLogoDarkSmallSvg";
 import OrangerieLogoDarkSmallSvg from "../../svg/OrangerieLogoDarkSmallSvg";
@@ -7,8 +8,15 @@ import "./piano.css";
 
 const Piano = () => {
   return (
-    <div className="containerPiano">
-      {/* LOGOS AND BACKGROUND LINES DOTS */}
+    <div className="Piano">
+      <div>
+        <h1>Changement de gamme</h1>
+        <FillesPianoCamera />
+      </div>
+    </div>
+
+    /* <div className="containerPiano">
+ 
       <div className="containerLogos">
         <div className="containerLogo">
           <div
@@ -31,7 +39,7 @@ const Piano = () => {
         </div>
       </div>
 
-      {/* DESCRIPTION */}
+   
       <div className="containerDescriptionFlowers">
         <p className="title">Changement de gamme</p>
 
@@ -48,7 +56,7 @@ const Piano = () => {
       </div>
 
       <div className="piano"></div>
-    </div>
+    </div> */
   );
 };
 
