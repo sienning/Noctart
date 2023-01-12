@@ -1,10 +1,10 @@
 import React from "react";
 
 import { LineDot } from "../../lineDot/LineDot";
-import FlowersSvg from "../../svg/FlowersSvg";
 import NoctartLogoDarkSmallSvg from "../../svg/NoctartLogoDarkSmallSvg";
 import OrangerieLogoDarkSmallSvg from "../../svg/OrangerieLogoDarkSmallSvg";
 import "./fleurs.css";
+import BouquetsImg from "../../../assets/img/bouquets.png";
 
 const Fleurs = () => {
   return (
@@ -50,7 +50,7 @@ const Fleurs = () => {
       </div>
 
       <div className="flowers">
-        <FlowersSvg />
+        <img src={BouquetsImg} style={{ width: "100vw" }} />
       </div>
     </div>
   );

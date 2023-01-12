@@ -84,3 +84,10 @@
 .nextButtonPiano:hover {
   background-color: #fc8c1e;
 }
+
+.fillesPianoImg {
+  position: absolute;
+  z-index: 2;
+  bottom: 0;
+  left: 0;
+}

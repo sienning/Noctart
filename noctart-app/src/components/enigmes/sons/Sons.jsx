@@ -6,7 +6,6 @@ import InfosSvg from "../../svg/InfosSvg";
 import SpeakerSvg from "../../svg/SpeakerSvg";
 import NoctartLogoDarkSmallSvg from "../../svg/NoctartLogoDarkSmallSvg";
 import OrangerieLogoDarkSmallSvg from "../../svg/OrangerieLogoDarkSmallSvg";
-import PainterSvg from "../../svg/PainterSvg";
 import ScanDragSvg from "../../svg/ScanDragSvg";
 import Recup from "./Recup";
 import Rendre from "./Rendre";
@@ -16,6 +15,7 @@ import { useNavigate } from "react-router-dom";
 import ArrowDownSvg from "../../svg/ArrowDownSvg";
 import SoundSvg from "../../svg/SoundSvg";
 import PuzzleSvg from "../../svg/PuzzleSvg";
+import BernotNavireImg from "../../../assets/img/bernot-navire.png";
 
 const Sons = () => {
   const [isRecup, setIsRecup] = useState(false);
@@ -234,8 +234,8 @@ const Sons = () => {
             </button>
           </div>
 
-          <div className="painter">
-            <PainterSvg />
+          <div className="bernotNavireImg">
+            <img src={BernotNavireImg} style={{ width: "100vw" }} />
           </div>
         </>
       )}

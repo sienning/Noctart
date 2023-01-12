@@ -32,10 +32,10 @@
   padding: 5px;
 }
 
-.painter {
+.bernotNavireImg {
   position: absolute;
   z-index: 2;
-  bottom: 10px;
+  bottom: 0px;
   left: 0;
 }
 

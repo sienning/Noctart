@@ -5,6 +5,7 @@ import { LineDot } from "../../lineDot/LineDot";
 import NoctartLogoDarkSmallSvg from "../../svg/NoctartLogoDarkSmallSvg";
 import OrangerieLogoDarkSmallSvg from "../../svg/OrangerieLogoDarkSmallSvg";
 import "./piano.css";
+import FillesPianoImg from "../../../assets/img/filles-piano.png";
 
 const Piano = () => {
   const [startEnigma, setStartEnigma] = useState(false);
@@ -53,6 +54,10 @@ const Piano = () => {
             >
               JOUER
             </button>
+          </div>
+
+          <div className="fillesPianoImg">
+            <img src={FillesPianoImg} style={{ width: "100vw" }} />
           </div>
         </>
       )}
