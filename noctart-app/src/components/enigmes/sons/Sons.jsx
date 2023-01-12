@@ -133,7 +133,7 @@ const Sons = () => {
             >
               <a-nft
                 type="nft"
-                url="assets/nft/rousseau"
+                url="assets/nft/rousseau/rousseau"
                 smooth="true"
                 smoothCount="10"
                 smoothTolerance=".01"

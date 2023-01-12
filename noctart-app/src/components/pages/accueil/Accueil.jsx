@@ -40,7 +40,7 @@ const Accueil = () => {
           l’orangerie se manifestent lorsque la nuit tombe, elles s’animent car
           elles ne peuvent demeurer en paix dans ces lieux… <br />
           Votre mission si vous l’acceptez, est de vous y rendre de nuit pour
-          comprendre la raison de leur tracas, et faire en sorte qu’elles
+          comprendre la raison de leurs tracas, et faire en sorte qu’elles
           puissent retrouver leur tranquillité.
         </p>
 
