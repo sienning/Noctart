@@ -24,10 +24,21 @@ const Sons = () => {
 
   const [startEnigma, setStartEnigma] = useState(false);
   const [state, setState] = useState("getSound");
+  const [inventory, setInventory] = useState("");
+  const [capturedPainting, setCapturedPainting] = useState("");
 
   const handleRecup = () => {
     setIsRecup(true);
     setIsRendre(false);
+    let soundPlay;
+
+    if (capturedPainting === "utrillo") {
+      soundPlay = new Audio(`/assets/painting-sounds/Sound_bateau.mp3`);
+    } else {
+      soundPlay = new Audio(`/assets/painting-sounds/Sound_montmartre.mp3`);
+    }
+    soundPlay.play();
+    setInventory("utrillo")
   };
 
   const handleRendre = () => {
@@ -58,29 +69,52 @@ const Sons = () => {
   };
 
   const handleClickAction = () => {
+    setIsFound(false)
     actions(state).action();
   };
 
   useEffect(() => {
     window.addEventListener("arjs-nft-loaded", (event) => {
       console.log(event);
-      const marker = document.querySelector("a-nft");
-
-      marker.addEventListener("markerFound", (event) => {
+      const markerRousseau = document.getElementById("rousseau-nft");
+      const markerUtrillo = document.getElementById("utrillo-nft");
+      console.log(markerRousseau);
+      console.log(markerUtrillo);
+      markerRousseau.addEventListener("markerFound", (event) => {
         console.log("event", event);
+        setCapturedPainting("rousseau")
+        setIsFound(true);
+      });
+      markerRousseau.addEventListener("markerLost", () => {
+        console.log("marqueur perdu");
+        setIsFound(false);
+      });
+
+      markerUtrillo.addEventListener("markerFound", (event) => {
+        console.log("event", event);
+        setCapturedPainting("utrillo")
 
         setIsFound(true);
       });
-      marker.addEventListener("markerLost", () => {
+      markerUtrillo.addEventListener("markerLost", () => {
         console.log("marqueur perdu");
         setIsFound(false);
       });
     });
   }, []);
 
-  useEffect(() => {}, []);
+  useEffect(() => { }, []);
 
   const navigate = useNavigate();
+
+  const handleChangeState = (newState) => {
+    setState(newState)
+    if (newState === "giveSound") {
+      setIsRecup(false)
+      setIsRendre(true)
+    }
+    
+  }
 
   return (
     <div className="containerSons">
@@ -132,8 +166,25 @@ const Sons = () => {
               arjs="trackingMethod: best; sourceType: webcam;debugUIEnabled: false; "
             >
               <a-nft
+                id="rousseau-nft"
                 type="nft"
                 url="assets/nft/rousseau/rousseau"
+                smooth="true"
+                smoothCount="10"
+                smoothTolerance=".01"
+                smoothThreshold="5"
+                emitevents="true"
+              >
+                <a-entity
+                  gltf-model=""
+                  scale="5 5 5"
+                  position="150 300 -100"
+                ></a-entity>
+              </a-nft>
+              <a-nft
+                id="utrillo-nft"
+                type="nft"
+                url="assets/nft/utrillo/utrillo"
                 smooth="true"
                 smoothCount="10"
                 smoothTolerance=".01"
@@ -152,7 +203,7 @@ const Sons = () => {
 
           {isRecup && (
             <div style={{ zIndex: 1 }}>
-              <Recup />
+              <Recup handleChangeState={handleChangeState} />
             </div>
           )}
           {isRendre && <Rendre />}
@@ -163,15 +214,12 @@ const Sons = () => {
             <button onClick={handleRendre}>Rendre un son</button>
           </div>
 
-          {/*           {isFound && (
+          {isFound && (
             <motion.button className="cameraAction" onClick={handleClickAction}>
               <ScanDragSvg />
             </motion.button>
-          )} */}
+          )}
 
-          <motion.button className="cameraAction" onClick={handleClickAction}>
-            <ScanDragSvg />
-          </motion.button>
 
           {/* BOTTOM BAR */}
           <div
