@@ -1,9 +1,16 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 
 const PianoTouch = () => {
-    const [playerTrack, setPlayerTrack] = useState([]);
-    const [index, setIndex] = useState([]);
 
+    const [level, setLevel] = useState(0); // Niveau du jeu
+    const [index, setIndex] = useState(0); // Note dans lequel le joueur est
+    const [isPlaying, setIsPlaying] = useState(false);
+    const [isPlayerPlaying, setIsPlayerPlaying] = useState(false);
+    const [isPlayerWinning, setIsPlayerWinning] = useState(false);
+
+    /**
+     * Notes du morceau
+     */
     const track = [
         {
             type: "black",
@@ -30,12 +37,9 @@ const PianoTouch = () => {
             note: "Dd5"
         }
     ]
-
-    const handlePlay = (note) => {
-        const notePlay = new Audio(`/assets/piano-sounds/${note.note}.wav`);
-        notePlay.play();
-    }
-
+    /**
+ * Notes de toutes les touches du piano
+ */
     const pianoNotes = [
         {
             type: "white",
@@ -116,12 +120,132 @@ const PianoTouch = () => {
 
     ]
 
+    /**
+     * Démarre le jeu
+     */
+    const handleLetsPlay = () => {
+        setIsPlaying(true);
+        modelPlay(level);
+    }
+
+    /**
+     * Lorsqu'une touche du piano est cliquée
+     * @param {Object} note {note: {String}<Nom-de-la-note>, type: {String}<Couleur-de-la-touche>}
+     */
+    const handlePlay = (note, player) => {
+        let tilePlayed = document.getElementById(note.note)
+        const notePlay = new Audio(`/assets/piano-sounds/${note.note}.wav`);
+        // On joue la note (son)
+        notePlay.play();
+
+        if (player === "model") {
+            tilePlayed.classList.add("active")
+            setTimeout(() => {
+                tilePlayed.classList.remove("active");
+            }, 4000)
+        } else { // Si c'est le joueur
+            if (track[index].note === note.note) { // Si c'est la bonne note
+                tilePlayed.classList.add("ok")
+                if (index < level) {
+                    setIndex(index + 1);
+                } else {
+                    setTimeout(() => {
+                        setLevel(level + 1)
+                        setIndex(0);
+                        setIsPlayerPlaying(false)
+                    }, 4000)
+                }
+                setTimeout(() => {
+                    tilePlayed.classList.remove("ok");
+                }, 4000)
+            } else { // Si c'est la mauvaise note, le jeu est arrêté
+                tilePlayed.classList.add("ko")
+                setTimeout(() => {
+                    tilePlayed.classList.remove("ko");
+                    setIsPlayerPlaying(false);
+                    setIsPlaying(false);
+                    setIndex(0);
+                    setLevel(0)
+                }, 4000)
+            }
+
+        }
+
+    }
+
+
+    /**
+     * Lorsque le modèle est joué pour que le joueur reproduise
+     * @param {Number} level Niveau du jeu de 0 à 5 (car 6 notes)
+     */
+    function modelPlay(level) {
+        setIsPlayerPlaying(false);
+
+        track.forEach((note, i) => {
+            if (i <= level) {
+                console.log("model play ", note);
+                if (i === 0) {
+                    handlePlay(note, "model");
+                } else {
+                    setTimeout(() => {
+                        handlePlay(note, "model");
+                    }, 4000 * (i));
+                }
+            }
+        })
+        setTimeout(() => {
+            setIsPlayerPlaying(true);
+        }, 4000 * (level + 1));
+    }
+
+
+    useEffect(() => {
+        if (level > 0 && level < 6) {
+            console.log("useeffect");
+            modelPlay(level);
+        } if (level > 5) {
+            setIsPlayerWinning(true)
+        }
+    }, [level])
+
+
+
     return (
         <div className="PianoTouch">
+            {
+                !isPlaying &&
+                <div className="button-play">
+                    <div>
+                        Rejouez les notes en surbrillance pour composer une mélodie finale <br></br>
+                        qui aidera les jeunes filles à déchiffrer la partition devant elles.
+                    </div>
+                    <button onClick={handleLetsPlay}>Jouer</button>
+                </div>
+            }
+            {
+                isPlayerWinning &&
+                <div className="button-play">
+                    <div>
+                        Bravo ! <br/>
+                        Vous venez de jouer les premières notes de Nocturne in E Flat Major (Op. 9 No. 2) de Chopin !
+                    </div>
+                    <button onClick={handleLetsPlay}>Continuer</button>
+                </div>
+            }
+            <div className="info-piano">
+                {
+                    isPlaying &&
+                    (
+                        isPlayerPlaying ?
+                            <span>À vous ! niveau {level}</span> :
+                            <span>Écoutez attentivement ... niveau {level}</span>
+                    )
+                }
+            </div>
             <ul className="piano-tiles">
                 {
                     pianoNotes.map((note, i) => (
-                        <li className={"tile " + note.type + " " + note.note} onClick={() => handlePlay(note)} key={i} ></li>
+                        <li id={note.note} className={"tile " + note.type + " " + note.note} onClick={() => handlePlay(note, "player")} key={i} ></li>
                     ))
                 }
             </ul>
