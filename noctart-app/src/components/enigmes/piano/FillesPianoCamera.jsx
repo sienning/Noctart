@@ -17,7 +17,7 @@ const FillesPianoCamera = () => {
   const [isPlayingEngima, setIsPlayingEnigma] = useState(false);
   const [isFound, setIsFound] = useState(false);
   const [state, setState] = useState("scan");
-  const [resolved, setResolved] = useState(false);
+  const [resolved, setResolved] = useState(true);
 
   const actions = (value) => {
     switch (value) {
