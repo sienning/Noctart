@@ -21,7 +21,7 @@ import bouquetDansUneLoge from "../../../assets/img/bouquet-dans-une-loge.png";
 import flowerCutout from "../../../assets/img/flower-cutout.png";
 import madameCezanneFleurs from "../../../assets/img/madame-cezanne-fleurs.png";
 
-const Fleurs = () => {
+const Fleurs = ({ setEnigmaTwoSolved }) => {
   const navigate = useNavigate();
 
   const [startEnigma, setStartEnigma] = useState(false);
@@ -169,7 +169,15 @@ const Fleurs = () => {
           ) : state === "found" ? (
             <div>
               {resolved ? (
-                <img src={madameCezanneFleurs} style={{ width: "100vw" }} />
+                <div
+                  style={{ width: "100vw" }}
+                  onClick={() => {
+                    setEnigmaTwoSolved(true);
+                    navigate("/enigme");
+                  }}
+                >
+                  <img src={madameCezanneFleurs} style={{ width: "100vw" }} />
+                </div>
               ) : (
                 <img src={dataPainting.img} style={{ width: "100vw" }} />
               )}

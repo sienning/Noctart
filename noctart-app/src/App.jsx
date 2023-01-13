@@ -9,7 +9,7 @@ import { ScanQrCode } from "./ScanQrCode";
 import { Enigmes } from "./components/pages/enigmes/Enigmes";
 
 function App() {
-  const [enigmaOneSolved, setEnigmaOneSolved] = useState(false);
+  const [enigmaOneSolved, setEnigmaOneSolved] = useState(true);
   const [enigmaTwoSolved, setEnigmaTwoSolved] = useState(false);
   const [enigmaThreeSolved, setEnigmaThreeSolved] = useState(false);
 
@@ -20,19 +20,23 @@ function App() {
     },
     {
       path: "/enigme",
-      element: <Enigmes
-        enigmaOneSolved={enigmaOneSolved}
-        enigmaTwoSolved={enigmaTwoSolved}
-        enigmaThreeSolved={enigmaThreeSolved}
-      />,
+      element: (
+        <Enigmes
+          enigmaOneSolved={enigmaOneSolved}
+          enigmaTwoSolved={enigmaTwoSolved}
+          enigmaThreeSolved={enigmaThreeSolved}
+        />
+      ),
     },
     {
       path: "/enigme/:enigmeId",
-      element: <Enigme
-        setEnigmaOneSolved={setEnigmaOneSolved}
-        setEnigmaTwoSolved={setEnigmaTwoSolved}
-        setEnigmaThreeSolved={setEnigmaThreeSolved}
-      />,
+      element: (
+        <Enigme
+          setEnigmaOneSolved={setEnigmaOneSolved}
+          setEnigmaTwoSolved={setEnigmaTwoSolved}
+          setEnigmaThreeSolved={setEnigmaThreeSolved}
+        />
+      ),
     },
     {
       path: "/qrcode",

@@ -11,13 +11,13 @@ import ArrowUpSvg from "../../svg/ArrowUpSvg";
 import JeunesFillesAuPiano from "../../../assets/img/jeunes-filles-au-piano.png";
 import PuzzleSvg from "../../svg/PuzzleSvg";
 
-const FillesPianoCamera = () => {
+const FillesPianoCamera = ({ setEnigmaThreeSolved }) => {
   const navigate = useNavigate();
 
   const [isPlayingEngima, setIsPlayingEnigma] = useState(false);
   const [isFound, setIsFound] = useState(false);
   const [state, setState] = useState("scan");
-  const [resolved, setResolved] = useState(true);
+  const [resolved, setResolved] = useState(false);
 
   const actions = (value) => {
     switch (value) {
@@ -161,7 +161,15 @@ const FillesPianoCamera = () => {
             </div>
           )}
 
-          {resolved && <img src={JeunesFillesAuPiano} />}
+          {resolved && (
+            <img
+              onClick={() => {
+                setEnigmaThreeSolved(true);
+                navigate("/enigme");
+              }}
+              src={JeunesFillesAuPiano}
+            />
+          )}
 
           {/* BOTTOM BAR */}
           <div

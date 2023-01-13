@@ -7,13 +7,13 @@ import OrangerieLogoDarkSmallSvg from "../../svg/OrangerieLogoDarkSmallSvg";
 import "./piano.css";
 import FillesPianoImg from "../../../assets/img/filles-piano.png";
 
-const Piano = () => {
+const Piano = ({ setEnigmaThreeSolved }) => {
   const [startEnigma, setStartEnigma] = useState(false);
 
   return (
     <div className="containerPiano">
       {startEnigma ? (
-        <FillesPianoCamera />
+        <FillesPianoCamera setEnigmaThreeSolved={setEnigmaThreeSolved} />
       ) : (
         <>
           <div className="containerLogos">
