@@ -18,6 +18,8 @@ import madameCezanne from "../../../assets/img/madame-cezanne-crop.png";
 import fleursDansUnVase from "../../../assets/img/fleurs-dans-un-vase.png";
 import bouquetDeTulipes from "../../../assets/img/bouquet-de-tulipes.png";
 import bouquetDansUneLoge from "../../../assets/img/bouquet-dans-une-loge.png";
+import flowerCutout from "../../../assets/img/flower-cutout.png";
+import madameCezanneFleurs from "../../../assets/img/madame-cezanne-fleurs.png";
 
 const Fleurs = () => {
   const navigate = useNavigate();
@@ -27,6 +29,8 @@ const Fleurs = () => {
   const [help, setHelp] = useState(false);
   const [painting, setPainting] = useState("");
   const [dataPainting, setDataPainting] = useState(null);
+  const [resolved, setResolved] = useState(false);
+  const [endEnigma, setEndEnigma] = useState(false);
 
   const actions = (value) => {
     switch (value) {
@@ -43,7 +47,11 @@ const Fleurs = () => {
         };
       case "found":
         return {
-          logo: <CheckSvg />,
+          logo: <CheckSvg color={resolved ? "#FC8C1E" : "#FFFFFF"} />,
+          onClick: () => {
+            setResolved(true);
+            setEndEnigma(true);
+          },
         };
       case "infos":
         return {
@@ -76,14 +84,11 @@ const Fleurs = () => {
   ];
 
   useEffect(() => {
-    console.log(painting);
     if (painting) {
       const result = data.find((value) => value.title === painting);
       setDataPainting(result);
     }
   }, [painting]);
-
-  console.log(dataPainting);
 
   return (
     <div className="containerFlowers">
@@ -163,7 +168,11 @@ const Fleurs = () => {
             <ScanQrCode setState={setState} setPainting={setPainting} />
           ) : state === "found" ? (
             <div>
-              <img src={dataPainting.img} style={{ width: "100vw" }} />
+              {resolved ? (
+                <img src={madameCezanneFleurs} style={{ width: "100vw" }} />
+              ) : (
+                <img src={dataPainting.img} style={{ width: "100vw" }} />
+              )}
             </div>
           ) : (
             <p>INFOS</p>
@@ -191,17 +200,34 @@ const Fleurs = () => {
               }}
             >
               <div
-                onClick={actions(state).onClick}
                 style={{
                   display: "flex",
                   alignSelf: state === "found" ? "flex-end" : "center",
+                  alignItems: "center",
                 }}
               >
-                {state === "found" &&
-                  [...Array(3)].map(() => (
+                {state === "found" && (
+                  <div
+                    style={{
+                      display: "flex",
+                      flexDirection: "row",
+                      alignItems: "center",
+                    }}
+                  >
+                    <div style={{ marginRight: "30px" }}>
+                      {painting ? (
+                        <img src={flowerCutout} style={{ width: "60px" }} />
+                      ) : (
+                        <FlowerSvg />
+                      )}
+                    </div>
                     <div style={{ marginRight: "30px" }}>{<FlowerSvg />}</div>
-                  ))}
-                {actions(state).logo}
+                    <div style={{ marginRight: "30px" }}>{<FlowerSvg />}</div>
+                  </div>
+                )}
+                <div onClick={actions(state).onClick}>
+                  {actions(state).logo}
+                </div>
               </div>
             </div>
           </div>
