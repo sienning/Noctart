@@ -10,7 +10,7 @@ import ScanDragSvg from "../../svg/ScanDragSvg";
 import Recup from "./Recup";
 import Rendre from "./Rendre";
 import "./sons.css";
-import OrangerieLogoO from "../../../assets/logo-o-orangerie.svg";
+import OrangerieLogoO from "../../../assets/logo-o-orangerie-grey.svg";
 import { useNavigate } from "react-router-dom";
 import ArrowDownSvg from "../../svg/ArrowDownSvg";
 import SoundSvg from "../../svg/SoundSvg";

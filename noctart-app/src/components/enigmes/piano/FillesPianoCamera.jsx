@@ -3,7 +3,7 @@ import PianoTouch from "./PianoTouch";
 import "./piano.css";
 import InfosSvg from "../../svg/InfosSvg";
 import SpeakerSvg from "../../svg/SpeakerSvg";
-import OrangerieLogoO from "../../../assets/logo-o-orangerie.svg";
+import OrangerieLogoO from "../../../assets/logo-o-orangerie-grey.svg";
 import ScanDragSvg from "../../svg/ScanDragSvg";
 import PianoSvg from "../../svg/PianoSvg";
 import { useNavigate } from "react-router-dom";
