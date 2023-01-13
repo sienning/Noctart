@@ -1,6 +1,5 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import Lottie from "lottie-react";
 
 import { LineDot } from "../../lineDot/LineDot";
 import NoctartLogoDarkSmallSvg from "../../svg/NoctartLogoDarkSmallSvg";
@@ -9,23 +8,34 @@ import "./fleurs.css";
 import BouquetsImg from "../../../assets/img/bouquets.png";
 import InfosSvg from "../../svg/InfosSvg";
 import { ScanQrCode } from "../../../ScanQrCode";
-import OrangerieLogoO from "../../../assets/logo-o-orangerie-grey.svg";
+import OrangerieLogoOGrey from "../../../assets/logo-o-orangerie-grey.svg";
+import OrangerieLogoOOrange from "../../../assets/logo-o-orangerie-orange.svg";
 import QrCodeSvg from "../../svg/QrCodeSvg";
 import FlowerSvg from "../../svg/FlowerSvg";
 import CheckSvg from "../../svg/CheckSvg";
 import ValidatedSvg from "../../svg/ValidatedSvg";
+import madameCezanne from "../../../assets/img/madame-cezanne-crop.png";
+import fleursDansUnVase from "../../../assets/img/fleurs-dans-un-vase.png";
+import bouquetDeTulipes from "../../../assets/img/bouquet-de-tulipes.png";
+import bouquetDansUneLoge from "../../../assets/img/bouquet-dans-une-loge.png";
 
 const Fleurs = () => {
   const navigate = useNavigate();
 
   const [startEnigma, setStartEnigma] = useState(false);
-  const [state, setState] = useState("scan");
+  const [state, setState] = useState("initial");
+  const [help, setHelp] = useState(false);
+  const [painting, setPainting] = useState("");
+  const [dataPainting, setDataPainting] = useState(null);
 
   const actions = (value) => {
     switch (value) {
       case "initial":
         return {
           logo: <ValidatedSvg />,
+          onClick: () => {
+            setState("scan");
+          },
         };
       case "scan":
         return {
@@ -41,6 +51,39 @@ const Fleurs = () => {
         };
     }
   };
+
+  const handleClickHelp = () => {
+    if (!help) {
+      setHelp(true);
+    } else {
+      setHelp(false);
+    }
+  };
+
+  const data = [
+    {
+      title: "Fleurs dans un vase",
+      img: fleursDansUnVase,
+    },
+    {
+      title: "Bouquet de tulipes",
+      img: bouquetDeTulipes,
+    },
+    {
+      title: "Bouquet dans une loge",
+      img: bouquetDansUneLoge,
+    },
+  ];
+
+  useEffect(() => {
+    console.log(painting);
+    if (painting) {
+      const result = data.find((value) => value.title === painting);
+      setDataPainting(result);
+    }
+  }, [painting]);
+
+  console.log(dataPainting);
 
   return (
     <div className="containerFlowers">
@@ -62,20 +105,75 @@ const Fleurs = () => {
             </div>
 
             <div
-              className="containerOptions"
               style={{ justifyContent: "flex-end" }}
+              onClick={handleClickHelp}
             >
               <InfosSvg />
             </div>
           </div>
 
-          <ScanQrCode />
+          {state === "initial" ? (
+            <div className="containerInitial">
+              <div
+                className="containerMessageFlowers"
+                style={{
+                  backgroundImage: `url(${OrangerieLogoOOrange})`,
+                  backgroundRepeat: "no-repeat",
+                  backgroundPositionX: "center",
+                  backgroundPositionY: "center",
+                  backgroundSize: "270px",
+                }}
+              >
+                {help ? (
+                  <p
+                    style={{
+                      color: "#FC8C1E",
+                      fontSize: "14px",
+                      fontWeight: 600,
+                      padding: "0px 10px",
+                    }}
+                  >
+                    Trouvez un moyen d'embellir le jardin de Madame Cézanne en
+                    trouvant des fleurs.
+                  </p>
+                ) : (
+                  <p
+                    style={{
+                      color: "#3D3636",
+                      fontSize: "14px",
+                      fontStyle: "italic",
+                    }}
+                  >
+                    “ Puis-je vous demander une faveur j'aimerais égayer mon
+                    jardin, pouvez-vous me rapporter des fleurs ? “
+                  </p>
+                )}
+              </div>
+
+              <img
+                src={madameCezanne}
+                style={{
+                  width: "100vw",
+                  position: "absolute",
+                  bottom: 0,
+                }}
+              />
+            </div>
+          ) : state === "scan" ? (
+            <ScanQrCode setState={setState} setPainting={setPainting} />
+          ) : state === "found" ? (
+            <div>
+              <img src={dataPainting.img} style={{ width: "100vw" }} />
+            </div>
+          ) : (
+            <p>INFOS</p>
+          )}
 
           {/* BOTTOM BAR */}
           <div
             style={{
               height: "12vh",
-              backgroundImage: `url(${OrangerieLogoO})`,
+              backgroundImage: `url(${OrangerieLogoOGrey})`,
               backgroundRepeat: "no-repeat",
               backgroundPositionX: "center",
               backgroundPositionY: "center",
@@ -84,7 +182,28 @@ const Fleurs = () => {
               alignItems: "center",
             }}
           >
-            <div>{actions(state).logo}</div>
+            <div
+              style={{
+                display: "flex",
+                flexDirection: "row",
+                width: "100%",
+                justifyContent: "center",
+              }}
+            >
+              <div
+                onClick={actions(state).onClick}
+                style={{
+                  display: "flex",
+                  alignSelf: state === "found" ? "flex-end" : "center",
+                }}
+              >
+                {state === "found" &&
+                  [...Array(3)].map(() => (
+                    <div style={{ marginRight: "30px" }}>{<FlowerSvg />}</div>
+                  ))}
+                {actions(state).logo}
+              </div>
+            </div>
           </div>
         </div>
       ) : (

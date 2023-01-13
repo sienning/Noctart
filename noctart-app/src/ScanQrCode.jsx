@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { useZxing } from "react-zxing";
-import { Data } from "./components/enigmes/data/Data";
 import ScanDragSvg from "./components/svg/ScanDragSvg";
 
-export const ScanQrCode = () => {
+export const ScanQrCode = ({ setState, setPainting }) => {
   const [result, setResult] = useState(null);
   const [isFound, setIsFound] = useState(false);
   const [resolved, setResolved] = useState(false);
@@ -24,7 +23,12 @@ export const ScanQrCode = () => {
     },
   });
 
-  const handleTap = () => {};
+  const handleTap = () => {
+    setPainting(result);
+    setTimeout(() => {
+      setState("found");
+    }, 500);
+  };
 
   useEffect(() => {
     if (result) {
@@ -41,15 +45,19 @@ export const ScanQrCode = () => {
       <video ref={ref} className="scanVideo" />
 
       {result ? (
-        <div>
+        <>
           {isFound && !resolved ? (
-            <div onClick={handleTap} className="scanTouchButton">
+            <div
+              onClick={handleTap}
+              className="scanTouchButton"
+              style={{ top: "30vh" }}
+            >
               <ScanDragSvg />
             </div>
           ) : (
             <p style={{ color: "white" }}>Ce n'est pas la bonne peinture</p>
           )}
-        </div>
+        </>
       ) : null}
     </div>
   );
