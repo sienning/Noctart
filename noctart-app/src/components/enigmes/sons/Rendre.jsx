@@ -20,9 +20,9 @@ const Rendre = ({ handleChangeState }) => {
     };
 
     const handleDrag = (e, ui) => {
-        console.log(ui);
+        console.log("y : ", ui.y);
         const { x, y } = deltaPosition;
-        if (ui.y < 50) {
+        if (ui.y < -180) {
             console.log("on donne le son");
             setIsVisible(false);
             handleChangeState("giveSound")
@@ -56,7 +56,7 @@ const Rendre = ({ handleChangeState }) => {
                     {
                         isVisible &&
                         <Draggable onDrag={(e, ui) => handleDrag(e, ui)} {...dragHandlers} >
-                            <div style={{ position: "absolute", top: "600px" }} className="box cursor-y">
+                            <div style={{ position: "absolute", top: "600px", left: "calc(50% - 25px)" }} className="box cursor-y">
                                 <Son />
                             </div>
                         </Draggable>

@@ -21,7 +21,7 @@ import EcranFin from "./EcranFin";
 const Sons = ({
   setEnigmaOneSolved
 }) => {
-  const [isResolved, setIsResolved] = useState(true);
+  const [isResolved, setIsResolved] = useState(false);
   const [isRecup, setIsRecup] = useState(false);
   const [isRendre, setIsRendre] = useState(false);
   const [isFound, setIsFound] = useState(false);
