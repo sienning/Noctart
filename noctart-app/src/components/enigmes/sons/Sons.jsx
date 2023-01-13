@@ -16,8 +16,10 @@ import { useNavigate } from "react-router-dom";
 import ArrowDownSvg from "../../svg/ArrowDownSvg";
 import SoundSvg from "../../svg/SoundSvg";
 import PuzzleSvg from "../../svg/PuzzleSvg";
+import EcranFin from "./EcranFin";
 
 const Sons = () => {
+  const [isResolved, setIsResolved] = useState(false);
   const [isRecup, setIsRecup] = useState(false);
   const [isRendre, setIsRendre] = useState(false);
   const [isFound, setIsFound] = useState(false);
@@ -26,24 +28,56 @@ const Sons = () => {
   const [state, setState] = useState("getSound");
   const [inventory, setInventory] = useState("");
   const [capturedPainting, setCapturedPainting] = useState("");
+  const [viewPainting, setViewPainting] = useState("");
+  const [level, setLevel] = useState(0);
 
   const handleRecup = () => {
     setIsRecup(true);
     setIsRendre(false);
     let soundPlay;
+    let capPainting = viewPainting;
+    setCapturedPainting(viewPainting)
 
-    if (capturedPainting === "utrillo") {
+    if (capPainting === "utrillo") {
       soundPlay = new Audio(`/assets/painting-sounds/Sound_bateau.mp3`);
+      setInventory("utrillo")
     } else {
       soundPlay = new Audio(`/assets/painting-sounds/Sound_montmartre.mp3`);
+      setInventory("rousseau")
     }
     soundPlay.play();
-    setInventory("utrillo")
   };
 
   const handleRendre = () => {
+    console.log("handleRendre");
     setIsRecup(false);
     setIsRendre(true);
+    let soundPlay;
+    let capPainting = viewPainting;
+    setCapturedPainting(viewPainting);
+
+    console.log("capPainting", capPainting);
+    console.log("inventory", inventory);
+
+    if (capPainting === "utrillo" && inventory === "utrillo") {
+      soundPlay = new Audio(`/assets/painting-sounds/Sound_montmartre.mp3`);
+      if (level < 2) {
+        setInventory("rousseau")
+      }
+
+    } else if (capPainting === "rousseau" && inventory === "rousseau") {
+      soundPlay = new Audio(`/assets/painting-sounds/Sound_bateau.mp3`);
+      if (level < 2) {
+        setInventory("utrillo")
+      }
+    } else if (capPainting === "rousseau" && inventory === "utrillo") {
+      soundPlay = new Audio(`/assets/painting-sounds/Sound_bateau.mp3`);
+      setInventory("rousseau");
+    } else if (capPainting === "utrillo" && inventory === "rousseau") {
+      soundPlay = new Audio(`/assets/painting-sounds/Sound_montmartre.mp3`);
+      setInventory("utrillo");
+    }
+    soundPlay.play();
   };
 
   const actions = (value) => {
@@ -56,6 +90,7 @@ const Sons = () => {
       case "giveSound":
         return {
           logo: <SoundSvg />,
+          action: handleRendre,
         };
       case "solved":
         return {
@@ -70,20 +105,23 @@ const Sons = () => {
 
   const handleClickAction = () => {
     setIsFound(false)
+    console.log("state : ", state);
     actions(state).action();
   };
 
   useEffect(() => {
+    console.log("capturedPainting", capturedPainting);
+
     window.addEventListener("arjs-nft-loaded", (event) => {
-      console.log(event);
       const markerRousseau = document.getElementById("rousseau-nft");
       const markerUtrillo = document.getElementById("utrillo-nft");
-      console.log(markerRousseau);
-      console.log(markerUtrillo);
       markerRousseau.addEventListener("markerFound", (event) => {
-        console.log("event", event);
-        setCapturedPainting("rousseau")
-        setIsFound(true);
+        console.log("capturedPainting");
+        setViewPainting("rousseau")
+        if (capturedPainting !== "rousseau") {
+          console.log("capturedPainting", capturedPainting);
+          setIsFound(true);
+        }
       });
       markerRousseau.addEventListener("markerLost", () => {
         console.log("marqueur perdu");
@@ -91,10 +129,12 @@ const Sons = () => {
       });
 
       markerUtrillo.addEventListener("markerFound", (event) => {
-        console.log("event", event);
-        setCapturedPainting("utrillo")
-
-        setIsFound(true);
+        console.log("capturedPainting");
+        setViewPainting("utrillo")
+        if (capturedPainting !== "utrillo") {
+          console.log("capturedPainting", capturedPainting);
+          setIsFound(true);
+        }
       });
       markerUtrillo.addEventListener("markerLost", () => {
         console.log("marqueur perdu");
@@ -108,18 +148,33 @@ const Sons = () => {
   const navigate = useNavigate();
 
   const handleChangeState = (newState) => {
-    setState(newState)
-    if (newState === "giveSound") {
-      setIsRecup(false)
-      setIsRendre(true)
+    console.log(level);
+    if (level + 1 < 3) {
+      if (level + 1 === 1) { // On vient de prendre un son
+        console.log("On vient de prendre un son");
+        if (newState === "giveSound") { // La prochaine étape est de le rendre
+          setIsRecup(false)
+        }
+      } else if (level + 1 === 2) { // On a rendu un son, au passage on en a récupéré un
+        console.log("On a rendu un son, au passage on en a récupéré un");
+        if (newState === "giveSound") { // On va rendre le son au dernier tableau
+          setIsRendre(false)
+        }
+      }
+
+      setState(newState)
+      setLevel(level + 1)
+    } else {
+      setIsRendre(false);
+      setState("solved");
+      setIsResolved(true);
     }
-    
   }
 
   return (
     <div className="containerSons">
       {startEnigma ? (
-        <div className="containerEnigmaSons">
+        <div className="containerEnigmaSons" >
           {/* HEADER BAR */}
           <div className="headerBar">
             <div className="headerBarContent">
@@ -152,6 +207,8 @@ const Sons = () => {
               <SpeakerSvg />
             </div>
           </div>
+
+         
 
           {/* CAMERA */}
           <div className="arjs-loader">
@@ -200,13 +257,19 @@ const Sons = () => {
               <a-entity camera></a-entity>
             </a-scene>
           </div>
+          {
+            isResolved &&
+            <div style={{ zIndex: 1 }}>
+              <EcranFin />
+            </div>
+          }
 
           {isRecup && (
             <div style={{ zIndex: 1 }}>
               <Recup handleChangeState={handleChangeState} />
             </div>
           )}
-          {isRendre && <Rendre />}
+          {isRendre && <Rendre handleChangeState={handleChangeState} />}
           <div>
             <button onClick={handleRecup} style={{ marginRight: 10 }}>
               Récupérer un son
