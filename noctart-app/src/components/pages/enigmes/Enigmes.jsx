@@ -8,10 +8,8 @@ import NoctartLogoDarkSmallSvg from "../../svg/NoctartLogoDarkSmallSvg";
 import OrangerieLogoDarkSmallSvg from "../../svg/OrangerieLogoDarkSmallSvg";
 import "./enigmes.css";
 
-export const Enigmes = () => {
-  const [enigmaOneSolved, setEnigmaOneSolved] = useState(true);
-  const [enigmaTwoSolved, setEnigmaTwoSolved] = useState(false);
-  const [enigmaThreeSolved, setEnigmaThreeSolved] = useState(false);
+export const Enigmes = ({enigmaOneSolved, enigmaTwoSolved, enigmaThreeSolved}) => {
+  
 
   return (
     <div className="container">

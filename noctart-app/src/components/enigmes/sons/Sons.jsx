@@ -18,8 +18,10 @@ import PuzzleSvg from "../../svg/PuzzleSvg";
 import BernotNavireImg from "../../../assets/img/bernot-navire.png";
 import EcranFin from "./EcranFin";
 
-const Sons = () => {
-  const [isResolved, setIsResolved] = useState(false);
+const Sons = ({
+  setEnigmaOneSolved
+}) => {
+  const [isResolved, setIsResolved] = useState(true);
   const [isRecup, setIsRecup] = useState(false);
   const [isRendre, setIsRendre] = useState(false);
   const [isFound, setIsFound] = useState(false);
@@ -260,7 +262,7 @@ const Sons = () => {
           </div>
           {isResolved && (
             <div style={{ zIndex: 1 }}>
-              <EcranFin />
+              <EcranFin setEnigmaOneSolved={setEnigmaOneSolved} />
             </div>
           )}
 
@@ -270,12 +272,7 @@ const Sons = () => {
             </div>
           )}
           {isRendre && <Rendre handleChangeState={handleChangeState} />}
-          <div>
-            <button onClick={handleRecup} style={{ marginRight: 10 }}>
-              Récupérer un son
-            </button>
-            <button onClick={handleRendre}>Rendre un son</button>
-          </div>
+          
 
           {isFound && (
             <motion.button className="cameraAction" onClick={handleClickAction}>
